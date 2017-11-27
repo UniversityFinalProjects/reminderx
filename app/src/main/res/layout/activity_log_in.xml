@@ -7,7 +7,7 @@
     tools:context="com.example.stavalfi.app1.LogInActivity">
 
     <EditText
-        android:id="@+id/username_textbox"
+        android:id="@+id/username_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="141dp" />
 
     <EditText
-        android:id="@+id/password_testbox"
+        android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteY="219dp" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
@@ -35,7 +35,7 @@
         tools:layout_editor_absoluteY="286dp" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/go_register_page_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
