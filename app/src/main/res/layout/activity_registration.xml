@@ -173,6 +173,16 @@
         android:layout_toLeftOf="@id/get_image"
         android:text="@string/register" />
 
+    <!-- take a picture button -->
+
+    <Button
+        android:id="@+id/take_a_picture_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enter_street_address_editText"
+        android:layout_toLeftOf="@id/register_button"
+        android:text="@string/take_a_picture" />
+
     <!--error label-->
 
     <TextView

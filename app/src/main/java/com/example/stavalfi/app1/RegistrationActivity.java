@@ -1,9 +1,9 @@
 package com.example.stavalfi.app1;
 
 import android.content.Intent;
-import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +20,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Bitmap image = null;
 
     public static final int PICK_IMAGE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +56,25 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (username.getText().toString().length() < 1 || password.getText().toString().length() < 1 ||
                         image == null) {
                     showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.empty_fields));
-                } else {
-                    User newUser = UserManager.getInstance().register(user);
-
-                    if (!newUser.isFakeUser()) {
-                        // use successfully registered with good Id.
-                        startActivity(new Intent(me, MenuActivity.class));
-                    } else {
-                        // user name exist
-                        showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.username_exist));
-                    }
+                    return;
                 }
+
+                User newUser = UserManager.getInstance().register(user);
+
+                if (!newUser.isFakeUser()) {
+                    // use successfully registered with good Id.
+                    startActivity(new Intent(me, MenuActivity.class));
+                    return;
+                }
+                // user name exist
+                showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.username_exist));
             }
         });
 
         Button pickImage = (Button) findViewById(R.id.get_image);
-        pickImage.setOnClickListener(new View.OnClickListener() {
+        pickImage.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -80,19 +84,62 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        Button takePictureButton = (Button) findViewById(R.id.take_a_picture_button);
+        takePictureButton.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PICK_IMAGE) {
-            Uri chosenImageUri = data.getData();
+        final TextView showErrorInRegistration = (TextView) findViewById(R.id.show_error_in_registration);
 
-            try {
-                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), chosenImageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (resultCode != RESULT_OK) {
+            // something went deeply wrong.
+            showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.error));
+        }
+
+        switch (requestCode) {
+            case PICK_IMAGE: {
+                Uri chosenImageUri = data.getData();
+
+                // check image file extension
+
+                String extension = getContentResolver().getType(chosenImageUri);
+                extension = extension.substring(extension.lastIndexOf("/") + 1); // Without dot jpg, png
+
+                if (extension == "jpg" || extension == "png") {
+                    // print: image added successfully
+                    showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.image_added_successfully));
+                } else {
+                    // print: we do not accept any other extensions
+                    showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.wrong_extension) + ": " + extension);
+                }
+
+                // save selected image file
+
+                try {
+                    this.image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), chosenImageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
             }
-
+            case REQUEST_IMAGE_CAPTURE: {
+                Bundle extras = data.getExtras();
+                this.image = (Bitmap) extras.get("data");
+                showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.image_added_successfully));
+                break;
+            }
         }
     }
 
