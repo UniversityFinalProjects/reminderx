@@ -1,9 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stavalfi.app1.RegistrationActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <!--username-->
+
+    <TextView
+        android:id="@+id/username_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_username" />
+
+    <EditText
+        android:id="@+id/enter_username_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="username"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <!--password-->
+
+    <TextView
+        android:id="@+id/password_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_username_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_password" />
+
+    <EditText
+        android:id="@+id/enter_password_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/password_register_text_view"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <!--email-->
+
+    <TextView
+        android:id="@+id/email_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_password_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_email" />
+
+    <EditText
+        android:id="@+id/enter_email_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/email_register_text_view"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <!--first name-->
+
+    <TextView
+        android:id="@+id/first_name_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_email_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_first_name" />
+
+    <EditText
+        android:id="@+id/enter_first_name_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/first_name_register_text_view"
+        android:ems="10"
+        android:inputType="text" />
+
+    <!--last name-->
+
+    <TextView
+        android:id="@+id/last_name_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_first_name_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_last_name" />
+
+    <EditText
+        android:id="@+id/enter_last_name_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/last_name_register_text_view"
+        android:ems="10"
+        android:inputType="text" />
+
+    <!--city name-->
+
+    <TextView
+        android:id="@+id/city_name_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_last_name_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_city_name" />
+
+    <EditText
+        android:id="@+id/enter_city_name_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/city_name_register_text_view"
+        android:ems="10"
+        android:inputType="text" />
+
+    <!--street address-->
+
+    <TextView
+        android:id="@+id/street_address_register_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_city_name_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_street_address" />
+
+    <EditText
+        android:id="@+id/enter_street_address_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/street_address_register_text_view"
+        android:ems="10"
+        android:inputType="text" />
+
+    <!--image-->
+
+    <Button
+        android:id="@+id/get_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/enter_street_address_editText"
+        android:text="@string/get_image" />
+
+    <!--register button-->
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enter_street_address_editText"
+        android:layout_toLeftOf="@id/get_image"
+        android:text="@string/register" />
+
+    <!--error label-->
+
+    <TextView
+        android:id="@+id/show_error_in_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/register_button"
+        android:ems="10" />
+</RelativeLayout>

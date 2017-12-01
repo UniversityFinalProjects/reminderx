@@ -1,7 +1,34 @@
 <resources>
-    <string name="app_name">app1</string>
+    <string name="app_name">ReminderX</string>
 
-    <!-- Strings related to login -->
+    <string name="enter_username">username</string>
 
-    <!-- Strings related to login -->
+    <string name="enter_password">password</string>
+
+    <string name="enter_email">email</string>
+
+    <string name="enter_first_name">first name</string>
+
+    <string name="enter_last_name">last name</string>
+
+    <string name="enter_city_name">city name</string>
+
+    <string name="enter_street_address">street address</string>
+
+    <string name="go_map_page">map</string>
+
+    <string name="go_readme_page">README</string>
+
+    <string name="go_register_page">register</string>
+
+    <string name="login">login</string>
+
+    <string name="register">register</string>
+
+    <string name="get_image">get image</string>
+    <string name="README">ReminderX is the best.</string>
+    <string name="title_activity_map">Map</string>
+    <string name="empty_fields">please fill image, username and password</string>
+    <string name="wrong_username_or_password">wrong username or password</string>
+    <string name="username_exist">username is already exist</string>
 </resources>

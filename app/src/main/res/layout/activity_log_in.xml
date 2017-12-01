@@ -1,44 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stavalfi.app1.LogInActivity">
 
+
+    <!--username-->
+
+    <TextView
+        android:id="@+id/username_login_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_username" />
+
     <EditText
         android:id="@+id/username_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/username_login_text_view"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <!--password-->
+
+    <TextView
+        android:id="@+id/password_login_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/username_editText"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="141dp" />
+        android:text="@string/enter_password" />
 
     <EditText
         android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/password_login_text_view"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="Password"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="219dp" />
+        android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="286dp" />
+    <!--register button-->
 
     <Button
         android:id="@+id/go_register_page_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="286dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/password_editText"
+        android:text="@string/go_register_page" />
+
+    <!--login button-->
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password_editText"
+        android:layout_toLeftOf="@id/go_register_page_button"
+        android:text="@string/login" />
+
+    <!--error label-->
+
+    <TextView
+        android:id="@+id/show_error_in_log_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/go_register_page_button"
+        android:ems="10" />
+
+</RelativeLayout>
