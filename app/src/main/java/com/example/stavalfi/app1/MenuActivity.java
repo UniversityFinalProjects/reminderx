@@ -38,8 +38,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        ImageView showMe = (ImageView) findViewById(R.id.imageView1);
-        if (UserManager.getInstance().getLoggedInUser().image != null)
-            showMe.setImageBitmap(UserManager.getInstance().getLoggedInUser().image);
+        Button userInfoButton = (Button) findViewById(R.id.go_user_info_page_button);
+        userInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(me, UserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

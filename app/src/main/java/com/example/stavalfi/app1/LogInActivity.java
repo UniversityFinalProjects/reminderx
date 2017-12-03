@@ -8,11 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class LogInActivity extends AppCompatActivity {
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (UserManager.getInstance().getLoggedInUser()!=null) {
+            startActivity(new Intent(this, MenuActivity.class));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +43,7 @@ public class LogInActivity extends AppCompatActivity {
                     Intent intent = new Intent(me, MenuActivity.class);
                     startActivity(intent);
                 } else {
-                    showErrorInLoggingIn.setText(getApplicationContext().getResources().getString(R.string.wrong_username_or_password));
+                    Toast.makeText(getApplicationContext(),getApplicationContext().getResources().getString(R.string.wrong_username_or_password),Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -35,4 +35,5 @@
     <string name="image_added_successfully">image added successfully</string>
     <string name="error">internal error</string>
     <string name="wrong_extension">wrong extension</string>
+    <string name="go_user_info_page">User Info</string>
 </resources>

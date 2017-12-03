@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -21,6 +22,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public static final int PICK_IMAGE = 1;
     public static final int REQUEST_IMAGE_CAPTURE = 2;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserManager.getInstance().getLoggedInUser() != null) {
+            startActivity(new Intent(this, MenuActivity.class));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if (username.getText().toString().length() < 1 || password.getText().toString().length() < 1 ||
                         image == null) {
-                    showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.empty_fields));
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -67,7 +76,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 // user name exist
-                showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.username_exist));
+                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.username_exist), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -105,7 +114,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (resultCode != RESULT_OK) {
             // something went deeply wrong.
-            showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.error));
+            Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
         }
 
         switch (requestCode) {
@@ -117,12 +126,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 String extension = getContentResolver().getType(chosenImageUri);
                 extension = extension.substring(extension.lastIndexOf("/") + 1); // Without dot jpg, png
 
-                if (extension == "jpg" || extension == "png") {
+                if (extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg")) {
                     // print: image added successfully
-                    showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.image_added_successfully));
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.image_added_successfully), Toast.LENGTH_SHORT).show();
                 } else {
                     // print: we do not accept any other extensions
-                    showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.wrong_extension) + ": " + extension);
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.wrong_extension) + ": " + extension, Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 // save selected image file
@@ -137,7 +147,7 @@ public class RegistrationActivity extends AppCompatActivity {
             case REQUEST_IMAGE_CAPTURE: {
                 Bundle extras = data.getExtras();
                 this.image = (Bitmap) extras.get("data");
-                showErrorInRegistration.setText(getApplicationContext().getResources().getString(R.string.image_added_successfully));
+                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.image_added_successfully), Toast.LENGTH_SHORT).show();
                 break;
             }
         }
