@@ -1,7 +1,12 @@
 package com.example.stavalfi.app1;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserManager {
 
@@ -14,39 +19,99 @@ public class UserManager {
     private UserManager() {
     }
 
-    private User loggedInUser;
-    private List<User> users = new ArrayList<>();
+    private String loggedInUserId;
 
-    public boolean login(String username, String password) {
-        for (User user : this.users)
-            if (user.username.equals(username) && user.password.equals(password)) {
-                this.loggedInUser = user;
-                return true;
-            }
-        return false;
+    public String getLoggedInUserId() {
+        return loggedInUserId;
     }
 
-    public String getUsers()
-    {
-        String str="[";
-        for (User user1 : this.users)
-            str+="("+user1.username+","+user1.password+"),";
-        str+="]";
-        return str;
+
+    public void registerUser(User user) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(DbTables.users);
+        String userId = myRef.push().getKey();
+        myRef.child(userId).setValue(user);
+        // set user role
+        if (user.getUsername().equals("1"))
+            setRoleTypeOfUser_toAdminRole(userId);
+        else
+            setRoleTypeOfUser_toUserRole(userId);
     }
 
-    public User getLoggedInUser() {
-        return this.loggedInUser;
+    public void setRoleTypeOfUser_toUserRole(String userId) {
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.userRoleTypes)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            UserRoleType userRoleType = messageSnapshot.getValue(UserRoleType.class);
+                            if (userRoleType.getRole().equals("user")) {
+                                setRoleTypeOfUser(userId, messageSnapshot.getKey());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 
-    public User register(User user) {
-        for (User user1 : this.users)
-            if (user1.username.equals(user.username)) {
-                return user1;
-            }
-        User newUser = new User((this.users.size() + 1) + "", user.username, user.password, user.emailAddress, user.firstName, user.lastName, user.cityName, user.streetAddress, user.image);
-        this.users.add(newUser);
-        login(newUser.username,newUser.password);
-        return newUser;
+    public void setRoleTypeOfUser_toManagerRole(String userId) {
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.userRoleTypes)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            UserRoleType userRoleType = messageSnapshot.getValue(UserRoleType.class);
+                            if (userRoleType.getRole().equals("manager")) {
+                                setRoleTypeOfUser(userId, messageSnapshot.getKey());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+    }
+
+    public void setRoleTypeOfUser_toAdminRole(String userId) {
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.userRoleTypes)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            UserRoleType userRoleType = messageSnapshot.getValue(UserRoleType.class);
+                            if (userRoleType.getRole().equals("admin")) {
+                                setRoleTypeOfUser(userId, messageSnapshot.getKey());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+    }
+
+    private void setRoleTypeOfUser(String userId, String userRoleTypeId) {
+        // update user role
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.users)
+                .child(userId)
+                .child("userRoleTypeId")
+                .setValue(userRoleTypeId);
+        // add to the hisotry
+        DatabaseReference myRef = FirebaseDatabase.getInstance()
+                .getReference(DbTables.userRoleTypeHistory);
+        String userRoleTypeHistoryId = myRef.push().getKey();
+        myRef.child(userId).setValue(new UserRoleTypeHistory(userId, userRoleTypeId));
+    }
+
+    public void setLoggedInUserId(String loggedInUserId) {
+        this.loggedInUserId = loggedInUserId;
     }
 }

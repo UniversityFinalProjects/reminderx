@@ -1,9 +1,7 @@
 package com.example.stavalfi.app1;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -22,14 +26,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public static final int PICK_IMAGE = 1;
     public static final int REQUEST_IMAGE_CAPTURE = 2;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (UserManager.getInstance().getLoggedInUser() != null) {
-            startActivity(new Intent(this, MenuActivity.class));
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +48,12 @@ public class RegistrationActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (username.getText().toString().length() < 1 || password.getText().toString().length() < 1 ||
+                        image == null) {
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 User user = new User(
                         username.getText().toString(),
                         password.getText().toString(),
@@ -60,23 +62,29 @@ public class RegistrationActivity extends AppCompatActivity {
                         lastName.getText().toString(),
                         cityName.getText().toString(),
                         streetAddress.getText().toString(),
-                        image);
+                        User.bitMapToString(image), "user");
 
-                if (username.getText().toString().length() < 1 || password.getText().toString().length() < 1 ||
-                        image == null) {
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(DbTables.users);
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            User user1 = messageSnapshot.getValue(User.class);
+                            if (user1.getUsername().equals(user.getUsername())) {
+                                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.username_exist), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        // register the user
+                        UserManager.getInstance().registerUser(user);
+                        // move to main menu
+                        startActivity(new Intent(me, MenuActivity.class));
+                    }
 
-                User newUser = UserManager.getInstance().register(user);
-
-                if (!newUser.isFakeUser()) {
-                    // use successfully registered with good Id.
-                    startActivity(new Intent(me, MenuActivity.class));
-                    return;
-                }
-                // user name exist
-                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.username_exist), Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
             }
         });
 

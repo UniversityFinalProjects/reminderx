@@ -9,14 +9,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.InputStream;
 
 public class MenuActivity extends AppCompatActivity {
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (UserManager.getInstance().getLoggedInUserId() == null) {
+            startActivity(new Intent(this, LogInActivity.class));
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        if (UserManager.getInstance().getLoggedInUserId() == null)
+            return;
+
 
         final MenuActivity me = this;
 
@@ -46,5 +63,59 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button logoutButton = (Button) findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserManager.getInstance().setLoggedInUserId(null);
+                Intent intent = new Intent(me, LogInActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button register = (Button) findViewById(R.id.go_register_page_button);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(me, RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // check the role type of the logged in user.
+        // if the role type is not manager or admin, then
+        // hide the button
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.users)
+                .child(UserManager.getInstance().getLoggedInUserId())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User loggedInUser = dataSnapshot.getValue(User.class);
+                        FirebaseDatabase.getInstance()
+                                .getReference(DbTables.userRoleTypes)
+                                .child(loggedInUser.getUserRoleTypeId())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        UserRoleType userRoleType = dataSnapshot.getValue(UserRoleType.class);
+                                        if (userRoleType.getRole().equals("admin"))
+                                            register.setVisibility(View.VISIBLE);
+                                        else
+                                            register.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 }

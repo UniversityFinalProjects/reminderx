@@ -152,7 +152,7 @@
         android:ems="10"
         android:inputType="text" />
 
-    <!--image-->
+    bitmapAsStringmage-->
 
     <Button
         android:id="@+id/get_image"

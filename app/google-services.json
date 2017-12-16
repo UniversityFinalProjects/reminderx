@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "78444830492",
+    "firebase_url": "https://reminderx-94ae2.firebaseio.com",
+    "project_id": "reminderx-94ae2",
+    "storage_bucket": "reminderx-94ae2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78444830492:android:b1e5f71d11a31ce7",
+        "android_client_info": {
+          "package_name": "com.example.stavalfi.app1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78444830492-6nf1lsd7p0odluud48cq2nmgh3pb616p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stavalfi.app1",
+            "certificate_hash": "2fa4dcdefda650dffaded5807c2a80757faaab5f"
+          }
+        },
+        {
+          "client_id": "78444830492-c5n2619hg2gkrj41m9300cpubcs83kvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVLOsVvL8eoyfjqig112ctB7UbBCLozjw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78444830492-c5n2619hg2gkrj41m9300cpubcs83kvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

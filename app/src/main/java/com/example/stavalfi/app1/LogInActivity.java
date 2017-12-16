@@ -10,15 +10,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class LogInActivity extends AppCompatActivity {
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if (UserManager.getInstance().getLoggedInUser()!=null) {
+        if (UserManager.getInstance().getLoggedInUserId() != null) {
             startActivity(new Intent(this, MenuActivity.class));
         }
     }
@@ -27,6 +33,9 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+        if (UserManager.getInstance().getLoggedInUserId() != null)
+            return;
 
         final EditText username = (EditText) findViewById(R.id.username_editText);
         final EditText password = (EditText) findViewById(R.id.password_editText);
@@ -39,24 +48,30 @@ public class LogInActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (UserManager.getInstance().login(username.getText().toString(), password.getText().toString())) {
-                    Intent intent = new Intent(me, MenuActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(),getApplicationContext().getResources().getString(R.string.wrong_username_or_password),Toast.LENGTH_SHORT).show();
-                }
+
+                FirebaseDatabase.getInstance()
+                        .getReference(DbTables.users)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                                    User user1 = messageSnapshot.getValue(User.class);
+                                    if (user1.getUsername().equals(username.getText().toString()) &&
+                                            user1.getPassword().equals(password.getText().toString())) {
+                                        UserManager.getInstance().setLoggedInUserId(messageSnapshot.getKey());
+                                        startActivity(new Intent(me, MenuActivity.class));
+                                        return;
+                                    }
+                                }
+                                //  username or password incorrect
+                                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.wrong_username_or_password), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
             }
         });
-
-        Button register = (Button) findViewById(R.id.go_register_page_button);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(me, RegistrationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 }
