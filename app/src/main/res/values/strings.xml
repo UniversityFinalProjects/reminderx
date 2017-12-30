@@ -30,14 +30,14 @@
 
     <string name="register">register</string>
 
-    <string name="get_image">get bitmapAsString</string>
+    <string name="get_image">choose image</string>
     <string name="take_a_picture">take a picture</string>
     <string name="README">ReminderX is the best.</string>
     <string name="title_activity_map">Map</string>
     <string name="empty_fields">please fill bitmapAsString, username and password</string>
     <string name="wrong_username_or_password">wrong username or password</string>
     <string name="username_exist">username is already exist</string>
-    <string name="image_added_successfully">bitmapAsString added successfully</string>
+    <string name="image_added_successfully">image added successfully</string>
     <string name="error">internal error</string>
     <string name="wrong_extension">wrong extension</string>
     <string name="go_user_info_page">User Info</string>
