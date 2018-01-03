@@ -17,15 +17,72 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
-        final TextView username = (TextView) findViewById(R.id.username_text_view);
-        final ImageView image = (ImageView) findViewById(R.id.my_image_view);
-        final TextView emailAddress = (TextView) findViewById(R.id.email_text_view);
-        final TextView firstName = (TextView) findViewById(R.id.first_name_text_view);
-        final TextView lastName = (TextView) findViewById(R.id.last_name_text_view);
-        final TextView cityName = (TextView) findViewById(R.id.city_name_text_view);
-        final TextView streetAddress = (TextView) findViewById(R.id.street_address_text_view);
-        final TextView userRoleType = (TextView) findViewById(R.id.user_role_type);
+        final TextView username = findViewById(R.id.username_text_view);
+        final ImageView image = findViewById(R.id.my_image_view);
+        final TextView emailAddress = findViewById(R.id.email_text_view);
+        final TextView firstName = findViewById(R.id.first_name_text_view);
+        final TextView lastName = findViewById(R.id.last_name_text_view);
+        final TextView cityName = findViewById(R.id.city_name_text_view);
+        final TextView streetAddress = findViewById(R.id.street_address_text_view);
+        final TextView userRoleType = findViewById(R.id.user_role_type);
+        final TextView clockReminders = findViewById(R.id.clock_history_rich);
+        final TextView roleHistory = findViewById(R.id.role_history_rich);
 
+        // show user clock reminders
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.clockReminders)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            ClockReminder reminder = messageSnapshot.getValue(ClockReminder.class);
+                            if (reminder.getUserId().equals(UserManager.getInstance().getLoggedInUserId()))
+                                clockReminders.setText(clockReminders.getText() + "\n" + reminder.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        // show user role history
+        FirebaseDatabase.getInstance()
+                .getReference(DbTables.userRoleTypeHistory)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                            UserRoleTypeHistory role = messageSnapshot.getValue(UserRoleTypeHistory.class);
+                            if (role.getUserId().equals(UserManager.getInstance().getLoggedInUserId())) {
+                                // get role name
+                                FirebaseDatabase.getInstance()
+                                        .getReference(DbTables.userRoleTypes)
+                                        .child(role.getUserRoleTypeId())
+                                        .addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                UserRoleType userRole = dataSnapshot.getValue(UserRoleType.class);
+                                                roleHistory.setText(roleHistory.getText() + "\n" + userRole.getRole());
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        // show user info + user role type
         FirebaseDatabase.getInstance()
                 .getReference(DbTables.users)
                 .child(UserManager.getInstance().getLoggedInUserId())
@@ -33,7 +90,7 @@ public class UserInfoActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User loggedInUser = dataSnapshot.getValue(User.class);
-                        username.setText(getApplicationContext().getResources().getString(R.string.enter_username) + ": " + loggedInUser.getUsername());
+                        username.setText("hi " + loggedInUser.getUsername() + ", have a good day!");
                         if (loggedInUser.getBitmapAsString() != null)
                             image.setImageBitmap(User.stringToBitMap(loggedInUser.getBitmapAsString()));
                         emailAddress.setText(getApplicationContext().getResources().getString(R.string.enter_email) + ": " + loggedInUser.getEmailAddress());
@@ -42,6 +99,7 @@ public class UserInfoActivity extends AppCompatActivity {
                         cityName.setText(getApplicationContext().getResources().getString(R.string.enter_city_name) + ": " + loggedInUser.getCityName());
                         streetAddress.setText(getApplicationContext().getResources().getString(R.string.enter_street_address) + ": " + loggedInUser.getStreetAddress());
 
+                        // get role name
                         FirebaseDatabase.getInstance()
                                 .getReference(DbTables.userRoleTypes)
                                 .addValueEventListener(new ValueEventListener() {
@@ -49,8 +107,8 @@ public class UserInfoActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                                             if (messageSnapshot.getKey().equals(loggedInUser.getUserRoleTypeId())) {
-                                                UserRoleType userRoleType = messageSnapshot.getValue(UserRoleType.class);
-                                                streetAddress.setText(getApplicationContext().getResources().getString(R.string.user_role_type) + ": " + userRoleType.getRole());
+                                                UserRoleType userRole = messageSnapshot.getValue(UserRoleType.class);
+                                                userRoleType.setText(getApplicationContext().getResources().getString(R.string.user_role_type) + ": " + userRole.getRole());
                                             }
                                         }
                                     }

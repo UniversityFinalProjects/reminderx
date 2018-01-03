@@ -7,12 +7,28 @@
     tools:context="com.example.stavalfi.app1.ReadmeActivity">
 
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="206dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/reminderx_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="88dp" />
+
     <TextView
         android:id="@+id/username_login_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="206dp"
+        android:layout_height="183dp"
         android:layout_alignParentLeft="true"
-        android:inputType="textPersonName"
-        android:text="@string/README" />
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="292dp"
+        android:inputType="textMultiLine"
+        android:text="@string/README"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="88dp" />
 
 </android.support.constraint.ConstraintLayout>

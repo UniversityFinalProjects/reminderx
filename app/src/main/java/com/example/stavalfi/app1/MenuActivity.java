@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
 
         final MenuActivity me = this;
 
-        Button mapButton = (Button) findViewById(R.id.go_map_page_button);
+        Button mapButton = findViewById(R.id.go_map_page_button);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        Button readmeButton = (Button) findViewById(R.id.go_readme_page_button);
+        Button readmeButton = findViewById(R.id.go_readme_page_button);
         readmeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        Button userInfoButton = (Button) findViewById(R.id.go_user_info_page_button);
+        Button userInfoButton = findViewById(R.id.go_user_info_page_button);
         userInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +64,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        Button logoutButton = (Button) findViewById(R.id.logout_button);
+        Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        Button register = (Button) findViewById(R.id.go_register_page_button);
+        Button register = findViewById(R.id.go_register_page_button);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

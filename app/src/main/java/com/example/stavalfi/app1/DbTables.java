@@ -6,6 +6,7 @@ package com.example.stavalfi.app1;
 
 public class DbTables {
     public static final String users = "users";
+    public static final String clockReminders = "clock_reminders";
     public static final String userRoleTypes = "user_role_types";
     public static final String userRoleTypeHistory = "user_role_type_history";
 }

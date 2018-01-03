@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class LogInActivity extends AppCompatActivity {
+
+    FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onResume() {
@@ -33,18 +38,17 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseDatabase.getInstance().getReference().keepSynced(true);
         if (UserManager.getInstance().getLoggedInUserId() != null)
             return;
 
-        final EditText username = (EditText) findViewById(R.id.username_editText);
-        final EditText password = (EditText) findViewById(R.id.password_editText);
-
-        final TextView showErrorInLoggingIn = (TextView) findViewById(R.id.show_error_in_log_in);
+        final EditText username = findViewById(R.id.username_editText);
+        final EditText password = findViewById(R.id.password_editText);
 
         final LogInActivity me = this;
 
-        Button loginButton = (Button) findViewById(R.id.login_button);
+        Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,9 +60,15 @@ public class LogInActivity extends AppCompatActivity {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                                     User user1 = messageSnapshot.getValue(User.class);
-                                    if (user1.getUsername().equals(username.getText().toString()) &&
+                                    if (user1 != null &&
+                                            user1.getUsername() != null &&
+                                            user1.getPassword() != null &&
+                                            user1.getUsername().equals(username.getText().toString()) &&
                                             user1.getPassword().equals(password.getText().toString())) {
                                         UserManager.getInstance().setLoggedInUserId(messageSnapshot.getKey());
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, user1.getUsername());
+                                        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
                                         startActivity(new Intent(me, MenuActivity.class));
                                         return;
                                     }

@@ -32,18 +32,15 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        final EditText username = (EditText) findViewById(R.id.enter_username_editText);
-        final EditText password = (EditText) findViewById(R.id.enter_password_editText);
-        final EditText emailAddress = (EditText) findViewById(R.id.enter_email_editText);
-        final EditText firstName = (EditText) findViewById(R.id.enter_first_name_editText);
-        final EditText lastName = (EditText) findViewById(R.id.enter_last_name_editText);
-        final EditText cityName = (EditText) findViewById(R.id.enter_city_name_editText);
-        final EditText streetAddress = (EditText) findViewById(R.id.enter_street_address_editText);
+        final EditText username = findViewById(R.id.enter_username_editText);
+        final EditText password = findViewById(R.id.enter_password_editText);
+        final EditText emailAddress = findViewById(R.id.enter_email_editText);
+        final EditText firstName = findViewById(R.id.enter_first_name_editText);
+        final EditText lastName = findViewById(R.id.enter_last_name_editText);
+        final EditText cityName = findViewById(R.id.enter_city_name_editText);
+        final EditText streetAddress = findViewById(R.id.enter_street_address_editText);
 
-        final TextView showErrorInRegistration = (TextView) findViewById(R.id.show_error_in_registration);
-
-
-        Button registerButton = (Button) findViewById(R.id.register_button);
+        Button registerButton = findViewById(R.id.register_button);
         final RegistrationActivity me = this;
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        Button pickImage = (Button) findViewById(R.id.get_image);
+        Button pickImage = findViewById(R.id.get_image);
         pickImage.setOnClickListener(new View.OnClickListener()
 
         {
@@ -101,7 +98,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        Button takePictureButton = (Button) findViewById(R.id.take_a_picture_button);
+        Button takePictureButton = findViewById(R.id.take_a_picture_button);
         takePictureButton.setOnClickListener(new View.OnClickListener()
 
         {
@@ -118,7 +115,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final TextView showErrorInRegistration = (TextView) findViewById(R.id.show_error_in_registration);
 
         if (resultCode != RESULT_OK) {
             // something went deeply wrong.

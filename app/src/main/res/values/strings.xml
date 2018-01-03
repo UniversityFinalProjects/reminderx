@@ -16,8 +16,6 @@
     <string name="enter_street_address">street address</string>
 
 
-    <string name="change_user_role_to_manager">change role to manager</string>
-    <string name="change_user_role_to_user">change role to user</string>
     <string name="user_role_type">user role type</string>
     <string name="go_map_page">map</string>
 
@@ -32,13 +30,16 @@
 
     <string name="get_image">choose image</string>
     <string name="take_a_picture">take a picture</string>
-    <string name="README">ReminderX is the best.</string>
+    <string name="README">ReminderX version 5.3 \n\nThis app is for creating remiders. It won the "Best App" competition for 2019 ;).</string>
     <string name="title_activity_map">Map</string>
-    <string name="empty_fields">please fill bitmapAsString, username and password</string>
+    <string name="empty_fields">please choose image, username and password</string>
     <string name="wrong_username_or_password">wrong username or password</string>
     <string name="username_exist">username is already exist</string>
     <string name="image_added_successfully">image added successfully</string>
     <string name="error">internal error</string>
     <string name="wrong_extension">wrong extension</string>
     <string name="go_user_info_page">User Info</string>
+
+    <string name="clock_reminders">clock reminders:</string>
+    <string name="role_history">role history:</string>
 </resources>

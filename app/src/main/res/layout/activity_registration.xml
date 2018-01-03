@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,187 +10,257 @@
     <!--username-->
 
     <TextView
-        android:id="@+id/username_register_text_view"
+        android:id="@+id/username_register_text_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="36dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/password_register_text_view3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:ems="10"
+        android:layout_below="@+id/enter_username_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="88dp"
+        android:ems="5"
         android:inputType="textPersonName"
-        android:text="@string/enter_username" />
+        android:text="@string/enter_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/email_register_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_password_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="148dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/first_name_register_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_email_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="204dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_first_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/last_name_register_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_first_name_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="256dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_last_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/city_name_register_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_last_name_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="316dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_city_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <TextView
+        android:id="@+id/street_address_register_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enter_city_name_editText"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="372dp"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="@string/enter_street_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="272dp" />
+
+    <Button
+        android:id="@+id/get_image"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/enter_street_address_editText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="468dp"
+        android:text="@string/get_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/enter_username_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="username"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--password-->
-
-    <TextView
-        android:id="@+id/password_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_username_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_password" />
 
     <EditText
         android:id="@+id/enter_password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/password_register_text_view"
+        android:layout_below="@+id/password_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--email-->
-
-    <TextView
-        android:id="@+id/email_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_password_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_email" />
 
     <EditText
         android:id="@+id/enter_email_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/email_register_text_view"
+        android:layout_below="@+id/email_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="132dp"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--first name-->
-
-    <TextView
-        android:id="@+id/first_name_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_email_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_first_name" />
 
     <EditText
         android:id="@+id/enter_first_name_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/first_name_register_text_view"
+        android:layout_below="@+id/first_name_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="188dp"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--last name-->
-
-    <TextView
-        android:id="@+id/last_name_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_first_name_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_last_name" />
 
     <EditText
         android:id="@+id/enter_last_name_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/last_name_register_text_view"
+        android:layout_below="@+id/last_name_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="236dp"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--city name-->
-
-    <TextView
-        android:id="@+id/city_name_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_last_name_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_city_name" />
 
     <EditText
         android:id="@+id/enter_city_name_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/city_name_register_text_view"
+        android:layout_below="@+id/city_name_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="300dp"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <!--street address-->
-
-    <TextView
-        android:id="@+id/street_address_register_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/enter_city_name_editText"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/enter_street_address" />
 
     <EditText
         android:id="@+id/enter_street_address_editText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/street_address_register_text_view"
+        android:layout_below="@+id/street_address_register_text_view3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="360dp"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--choose image button-->
-
-    <Button
-        android:id="@+id/get_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/enter_street_address_editText"
-        android:text="@string/get_image" />
 
     <!--register button-->
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="134dp"
+        android:layout_height="82dp"
         android:layout_below="@+id/enter_street_address_editText"
-        android:layout_toLeftOf="@id/get_image"
-        android:text="@string/register" />
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="424dp"
+        android:text="@string/register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- take a picture button -->
 
     <Button
         android:id="@+id/take_a_picture_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/enter_street_address_editText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="420dp"
         android:layout_toLeftOf="@id/register_button"
-        android:text="@string/take_a_picture" />
+        android:text="@string/take_a_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--error label-->
-
-    <TextView
-        android:id="@+id/show_error_in_registration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/register_button"
-        android:ems="10" />
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

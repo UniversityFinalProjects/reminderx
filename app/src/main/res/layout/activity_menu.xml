@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stavalfi.app1.MenuActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="206dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/reminderx_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="88dp" />
 
     <!--map button-->
 
@@ -14,7 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="@string/go_map_page" />
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="336dp"
+        android:text="@string/go_map_page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="88dp" />
 
     <!--readme button-->
 
@@ -25,7 +41,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/go_map_page_button"
-        android:text="@string/go_readme_page" />
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="272dp"
+        android:text="@string/go_readme_page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="204dp" />
 
     <!--show user info button-->
 
@@ -36,7 +57,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/go_readme_page_button"
-        android:text="@string/go_user_info_page" />
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="336dp"
+        android:text="@string/go_user_info_page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="204dp" />
 
     <!--logout button-->
 
@@ -47,7 +73,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/go_user_info_page_button"
-        android:text="@string/logout" />
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="404dp"
+        android:text="@string/logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="148dp" />
 
     <!--register button-->
 
@@ -58,6 +89,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/logout_button"
-        android:text="@string/go_register_page" />
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="272dp"
+        android:text="@string/go_register_page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="88dp" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

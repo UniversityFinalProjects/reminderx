@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stavalfi.app1.LogInActivity">
 
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="206dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/reminderx_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="76dp" />
+
     <!--username-->
 
     <TextView
         android:id="@+id/username_login_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:ems="10"
+        android:layout_height="19dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="264dp"
+        android:ems="5"
         android:inputType="textPersonName"
-        android:text="@string/enter_username" />
+        android:text="@string/enter_username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="260dp" />
 
     <EditText
         android:id="@+id/username_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/username_login_text_view"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="248dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="44dp" />
 
     <!--password-->
 
@@ -33,19 +53,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/username_editText"
-        android:ems="10"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="320dp"
+        android:ems="5"
         android:inputType="textPersonName"
-        android:text="@string/enter_password" />
+        android:text="@string/enter_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="260dp" />
 
     <EditText
         android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/password_login_text_view"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="304dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="44dp" />
 
     <!--login button-->
 
@@ -54,17 +82,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password_editText"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="376dp"
         android:layout_toLeftOf="@id/go_register_page_button"
-        android:text="@string/login" />
+        android:text="@string/login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="136dp" />
 
     <!--error label-->
 
-    <TextView
-        android:id="@+id/show_error_in_log_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/go_register_page_button"
-        android:ems="10" />
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
