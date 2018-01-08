@@ -61,6 +61,10 @@ public class User {
         }
     }
 
+    public static boolean isValidEmail(User user) {
+        return user.getEmailAddress().contains("@");
+    }
+
     public String getUsername() {
         return username;
     }
