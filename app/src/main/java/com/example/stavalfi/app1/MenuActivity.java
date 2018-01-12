@@ -1,20 +1,15 @@
 package com.example.stavalfi.app1;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.InputStream;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -100,7 +95,7 @@ public class MenuActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         UserRoleType userRoleType = dataSnapshot.getValue(UserRoleType.class);
-                                        if (userRoleType.getRole().equals("admin"))
+                                        if (userRoleType.getRole().equals("admin") || userRoleType.getRole().equals("manager"))
                                             register.setVisibility(View.VISIBLE);
                                         else
                                             register.setVisibility(View.GONE);

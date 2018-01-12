@@ -1,7 +1,5 @@
 package com.example.stavalfi.app1;
 
-import android.content.Intent;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,7 +106,7 @@ public class UserManager {
         DatabaseReference myRef = FirebaseDatabase.getInstance()
                 .getReference(DbTables.userRoleTypeHistory);
         String userRoleTypeHistoryId = myRef.push().getKey();
-        myRef.child(userId).setValue(new UserRoleTypeHistory(userId, userRoleTypeId));
+        myRef.child(userRoleTypeHistoryId).setValue(new UserRoleTypeHistory(userId, userRoleTypeId));
     }
 
     public void setLoggedInUserId(String loggedInUserId) {
