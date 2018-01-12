@@ -3,12 +3,17 @@ package com.example.stavalfi.app1;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.Keep;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
 public class User {
 
+    @Keep
+    // I kept this member name because I wanted to know
+    // in debug time: to know if an operation request
+    // the username information
     private String username;
     private String password;
     private String emailAddress;
@@ -39,6 +44,10 @@ public class User {
         this.userRoleTypeId = userRoleTypeId;
     }
 
+    @Keep
+    // I kept this constructor name because firebase
+    // use it to initialize this object and I want
+    // to see every time it happens.
     public User() {
     }
 
@@ -64,6 +73,7 @@ public class User {
     public static boolean isValidEmail(User user) {
         return user.getEmailAddress().contains("@");
     }
+
 
     public String getUsername() {
         return username;

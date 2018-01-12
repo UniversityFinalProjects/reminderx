@@ -1,26 +1,18 @@
 package com.example.stavalfi.app1;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -77,6 +69,7 @@ public class LogInActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.wrong_username_or_password), Toast.LENGTH_SHORT).show();
                             }
 
+                            //STOPSHIP
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                             }
