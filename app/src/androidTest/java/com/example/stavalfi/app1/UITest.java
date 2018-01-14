@@ -1,5 +1,7 @@
 package com.example.stavalfi.app1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -19,5 +21,15 @@ public class UITest {
 
         // check that the home button is working!
         Assert.assertNotEquals(mDevice, null);
+        mDevice.pressHome();
+                /* Open application */
+        openApp("com.example.stavalfi.app1");
+
+    }
+    private void openApp(String packageName) {
+        Context context = InstrumentationRegistry.getInstrumentation().getContext();
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
     }
 }
